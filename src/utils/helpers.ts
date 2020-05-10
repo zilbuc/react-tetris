@@ -14,9 +14,9 @@ export const generateEmptyBoard = (): number[][] => {
 	return board
 }
 
-export const getInterval = (level: number): number => (1000 - (level * 50 > 600 ? 600 : level * 50))
+export const getInterval = (level: number): number => (1000 - (level * 100 > 800 ? 800 : level * 100))
 
-export const getNewLevel = (score: number) => 1 + Math.floor(score / 5)
+export const getNewLevel = (score: number): number => 1 + Math.floor(score / 5)
 
 export const removeBrickFromBoard = (
 	board: Board,

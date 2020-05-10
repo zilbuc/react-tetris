@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { ReactNode } from 'react'
 import classNames from 'classnames'
 import {
 	addBrickToBoard,
@@ -158,13 +158,12 @@ class Tetris extends React.Component<{}, TetrisState> {
 	render() {
 
 		const { board, gameOver, score } = this.state
-		console.log(this.state.level, getInterval(this.state.level))
 
 		return (
 			<div className={styles.tetrisWrapper}>
 				<div>
-					{board.map((row, index) => {
-						const cols = row.map((column: number, index: number) =>
+					{board.map((row: number[], index: number): ReactNode => {
+						const cols = row.map((column: number, index: number): ReactNode =>
 							<div className={classNames(styles.brick, { [styles.noLongerEmpty]: column})} key={index} />)
 
 						return <div className={styles.boardRow} key={index}>{cols}</div>
