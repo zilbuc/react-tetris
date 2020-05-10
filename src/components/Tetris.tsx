@@ -158,6 +158,7 @@ class Tetris extends React.Component<{}, TetrisState> {
 	render() {
 
 		const { board, gameOver, score } = this.state
+		console.log(this.state.level, getInterval(this.state.level))
 
 		return (
 			<div className={styles.tetrisWrapper}>
