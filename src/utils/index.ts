@@ -2,6 +2,7 @@ export { bricks, boardHeight, boardWidth, initialState, listener } from './const
 export {
 	addBrickToBoard,
 	getBrickChange,
+	cloneBoard,
 	generateEmptyBoard,
 	generateBrick,
 	getInterval,

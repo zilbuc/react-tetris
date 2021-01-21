@@ -18,6 +18,8 @@ export const getInterval = (level: number): number => (1000 - (level * 100 > 800
 
 export const getNewLevel = (score: number): number => 1 + Math.floor(score / 5)
 
+export const cloneBoard = (board: Board) => JSON.parse(JSON.stringify(board))
+
 export const removeBrickFromBoard = (
 	board: Board,
 	brick: number,
@@ -25,7 +27,7 @@ export const removeBrickFromBoard = (
 	x: number,
 	y: number
 ): Board => {
-	const newBoard = board
+	const newBoard = cloneBoard(board)
 
 	for (let i = 0; i < 4; i++) {
 		newBoard[y + bricks[brick][rotate][i][1]][x + bricks[brick][rotate][i][0]] = 0
@@ -41,7 +43,7 @@ export const addBrickToBoard = (
 	x: number,
 	y: number
 ): Board => {
-	const newBoard = board
+	const newBoard = cloneBoard(board)
 
 	for (let i = 0; i < 4; i++) {
 		newBoard[y + bricks[brick][rotate][i][1]][x + bricks[brick][rotate][i][0]] = brick
@@ -134,13 +136,15 @@ export const getNewRotate = (
 }
 
 export const removeFullRows = (board: Board): { newBoard: Board, scoreChange: number } => {
+	const newBoard = cloneBoard(board)
+
 	let scoreChange = 0
 
 	for (let row = boardHeight - 1; row >= 0; row--) {
 		let isRowFull = true
 
 		for (let col = 0; col < boardWidth; col++) {
-			if (board[row][col] === 0) {
+			if (newBoard[row][col] === 0) {
 				isRowFull = false
 			}
 		}
@@ -150,7 +154,7 @@ export const removeFullRows = (board: Board): { newBoard: Board, scoreChange: nu
 
 			for (let i = row; i > 0; i--) {
 				for (let col = 0; col < boardWidth; col++) {
-					board[i][col] = board[i - 1][col]
+					newBoard[i][col] = newBoard[i - 1][col]
 				}
 			}
 
@@ -159,7 +163,7 @@ export const removeFullRows = (board: Board): { newBoard: Board, scoreChange: nu
 	}
 
 	return {
-		newBoard: board,
+		newBoard,
 		scoreChange
 	}
 }

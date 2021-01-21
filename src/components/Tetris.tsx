@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import classNames from 'classnames'
 import {
 	addBrickToBoard,
+	cloneBoard,
 	getBrickChange,
 	generateEmptyBoard,
 	generateBrick,
@@ -80,7 +81,7 @@ class Tetris extends React.Component<{}, TetrisState> {
 
 		const { xChange, yChange, rotateChange } = getBrickChange(command)
 
-		let board = this.state.board
+		let board = cloneBoard(this.state.board)
 		let brick = this.state.currentBrick
 		let rotate = this.state.brickRotate
 		let x = this.state.currentBrickX
